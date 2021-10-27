@@ -1,0 +1,660 @@
+<!--
+  ~ COMPASS orienteering game
+  ~ Copyright (C) 2021 University of Vienna
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+  -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="./ol.css" type="text/css" />
+    <script src="./ol.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./ol-ext.min.css" />
+    <script type="text/javascript" src="./ol-ext.min.js"></script>
+    <style>
+      body {
+        margin: 0px;
+      }
+      .map {
+        height: 400px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map" class="map"></div>
+    <script type="text/javascript">
+      "use strict";
+
+      var vectorSourceControlPoints = new ol.source.Vector();
+      var vectorSourceMyLocation = new ol.source.Vector();
+      var vectorSourceMyLocationOuter = new ol.source.Vector();
+      var linesSource = new ol.source.Vector();
+
+      var symbolsFactor = 2;
+      var startRotation = 0;
+      var textOffset = 20;
+      var textSize = 24;
+
+      var colorPurple = "#bf1377";
+      var colorGrey = "#777777";
+
+      var strokePurple = new ol.style.Stroke({
+        color: colorPurple,
+        width: 1 * symbolsFactor,
+      });
+
+      var strokeGrey = new ol.style.Stroke({
+        color: colorGrey,
+        width: 1 * symbolsFactor,
+      });
+
+      var lineStylePurple = new ol.style.Style({ stroke: strokePurple });
+      var lineStyleGrey = new ol.style.Style({ stroke: strokeGrey });
+
+      var styleStartPurple = new ol.style.Style({
+        image: new ol.style.RegularShape({
+          stroke: strokePurple,
+          points: 3,
+          radius: symbolsFactor * ((6 * 2) / Math.sqrt(3)),
+          rotation: startRotation,
+          angle: 0,
+        }),
+      });
+
+      var styleStartGrey = new ol.style.Style({
+        image: new ol.style.RegularShape({
+          stroke: strokeGrey,
+          points: 3,
+          radius: symbolsFactor * ((6 * 2) / Math.sqrt(3)),
+          rotation: startRotation,
+          angle: 0,
+        }),
+      });
+
+      var styleCPPurple = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 5.5,
+          stroke: strokePurple,
+        }),
+        text: new ol.style.Text({
+          font: textSize + "px Calibri,sans-serif",
+          fill: new ol.style.Fill({ color: colorPurple }),
+          stroke: new ol.style.Stroke({ color: colorPurple, width: 2 }),
+          text: "",
+          offsetX: textOffset,
+          offsetY: textOffset * -1,
+        }),
+      });
+
+      var styleCPGrey = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 5.5,
+          stroke: strokeGrey,
+        }),
+        text: new ol.style.Text({
+          font: textSize + "px Calibri,sans-serif",
+          fill: new ol.style.Fill({ color: colorGrey }),
+          stroke: new ol.style.Stroke({ color: colorGrey, width: 2 }),
+          text: "",
+          offsetX: textOffset,
+          offsetY: textOffset * -1,
+        }),
+      });
+
+      var styleFinishSmallPurple = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 4,
+          stroke: strokePurple,
+        }),
+      });
+
+      var styleFinishSmallGrey = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 4,
+          stroke: strokeGrey,
+        }),
+      });
+
+      var styleFinishBigPurple = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 6,
+          stroke: strokePurple,
+        }),
+      });
+
+      var styleFinishBigGrey = new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: symbolsFactor * 6,
+          stroke: strokeGrey,
+        }),
+      });
+
+	  var invisibleStyle = new ol.style.Style({});
+
+      var controlPointsLayer = new ol.layer.Vector({
+        source: vectorSourceControlPoints,
+        style: new ol.style.Style({
+          stroke: strokePurple,
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: "#ffcc33",
+            }),
+          }),
+        }),
+      });
+
+      var linesLayer = new ol.layer.Vector({
+        source: linesSource,
+        zIndex: 2,
+        style: new ol.style.Style({
+          stroke: strokePurple,
+        }),
+      });
+
+      var myLocationStyleInner = new ol.style.Style({
+          stroke: strokePurple,
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: "#ff008c",
+<!--              color: "#4245f5",-->
+            }),
+          }),
+        });
+      var myLocationStyleOuter = new ol.style.Style({
+          stroke: strokePurple,
+          image: new ol.style.Circle({
+            radius: 9,
+            fill: new ol.style.Fill({
+              color: "#ffffff",
+            })
+          })
+        });
+
+      var myLocationLayer = new ol.layer.Vector({
+        source: vectorSourceMyLocation,
+        style: myLocationStyleInner
+      });
+      var myLocationOuterLayer = new ol.layer.Vector({
+        source: vectorSourceMyLocationOuter,
+        style: myLocationStyleOuter
+      });
+
+      controlPointsLayer.setZIndex(2);
+      myLocationLayer.setZIndex(4);
+      myLocationOuterLayer.setZIndex(3);
+
+      var controls = ol.control
+        .defaults({ rotate: false, zoom: false, attribution: false })
+        .extend([
+          new ol.control.ScaleLine({
+            units: "metric",
+            bar: true,
+            steps: 4,
+            text: false,
+            minWidth: 100,
+          }),
+        ]);
+
+      var interactions = ol.interaction.defaults({
+        altShiftDragRotate: false,
+        pinchRotate: false,
+      });
+
+      var map = new ol.Map({
+        target: "map",
+        controls: controls,
+        interactions: interactions,
+        layers: [controlPointsLayer, myLocationLayer, myLocationOuterLayer, linesLayer],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([16.2732183, 48.245913]),
+          zoom: 14,
+        }),
+      });
+
+      var initialResolution = map.getView().getResolution();  // TODO: weg?
+
+      var cp_longitudes;
+      var cp_latitudes;
+      var i_next_unreached;
+      var draw_only_start;
+
+	  var extentDefault;
+	  var defaultView;
+
+	  var myLocation;
+	  var global_maxCachedZoom;
+	  var global_minCachedZoom;
+
+      var currentZoom = -1;
+      // Redraw lines when zooming -> TODO: ONLY when zooming https://gis.stackexchange.com/questions/309387/how-to-detect-zoom-change-in-openlayers/309404 doesnt work yet
+      map.on("moveend", function() {
+          var newZoom = map.getView().getZoom();
+          var zoomInfo = 'Zoom level = ' + newZoom;
+          if (currentZoom != newZoom && !draw_only_start && cp_longitudes !== undefined) {
+            drawAllLines();
+            currentZoom = newZoom;
+          }
+      });
+
+      function initControlPoints(longitudes, latitudes) {
+        cp_longitudes = longitudes;
+        cp_latitudes = latitudes;
+	  }
+
+      function drawAllLines() {
+		// (re-)draw CP lines
+        linesSource.clear();
+        var i;
+        for (i = 1; i < cp_longitudes.length; i++) {
+          drawLine(cp_longitudes[i-1], cp_latitudes[i-1], cp_longitudes[i], cp_latitudes[i], i < i_next_unreached);
+        }
+      }
+
+      function drawLine(lon1, lat1, lon2, lat2, reached) {
+        const currResolution = map.getView().getResolution();
+        const factorResolution = currResolution / initialResolution;
+
+        var tempP1 = ol.proj.transform([lon1, lat1], 'EPSG:4326', 'EPSG:3857');
+        var tempP2 = ol.proj.transform([lon2, lat2], 'EPSG:4326', 'EPSG:3857');
+        var diffLon = tempP2[0] - tempP1[0];
+        var diffLat = tempP2[1] - tempP1[1];
+
+        var angleOfLine = Math.atan2(diffLat, diffLon);
+
+        var dLon = Math.cos(angleOfLine) * (8*currResolution);
+        var dLat = Math.sin(angleOfLine) * (8*currResolution);
+        var offsetLon = dLon / (111111 * Math.cos((Math.PI * lat2) / 180));
+        var offsetLat = dLat / 111111;
+
+        var lat1o = lat1 + offsetLat;
+        var lon1o = lon1 + offsetLon;
+        var lat2o = lat2 - offsetLat;
+        var lon2o = lon2 - offsetLon;
+
+        var line = new ol.geom.LineString([
+          ol.proj.fromLonLat([lon1o, lat1o]),
+          ol.proj.fromLonLat([lon2o, lat2o]),
+        ]);
+
+        var featureLine = new ol.Feature(line);
+        if (!reached) {
+          featureLine.setStyle(lineStylePurple);
+        } else {
+          featureLine.setStyle(lineStyleGrey);
+        }
+
+        linesSource.addFeature(featureLine);
+      }
+
+      function drawControlPoints(i_next, onlyStart) {
+	    i_next_unreached = i_next;
+	    draw_only_start = onlyStart;
+
+        vectorSourceControlPoints.clear();
+
+        var i;
+        for (i = 0; i < cp_longitudes.length; i++) {
+		  var unreached = (i >= i_next_unreached);
+		  var invisible = ((i != 0) && onlyStart);
+
+		  // Create point feature
+          const point = new ol.geom.Point(ol.proj.fromLonLat([cp_longitudes[i], cp_latitudes[i]]));
+          const featurePoint = new ol.Feature({
+            name: "Controlpoint ID " + i,
+            geometry: point,
+          });
+          featurePoint.setId(i);
+
+		  // Add CP number to CPs style
+          var cpStyleWithText;
+		  if (invisible) {
+		    cpStyleWithText = invisibleStyle.clone();
+		  } else if (unreached) {
+            cpStyleWithText = styleCPPurple.clone();
+          } else {
+            cpStyleWithText = styleCPGrey.clone();
+          }
+		  if (!invisible) {
+            cpStyleWithText.getText().setText(i + "");
+          }
+          featurePoint.setStyle(cpStyleWithText);
+
+		  // Handle finish
+          if (cp_longitudes.length > 1 && i === cp_longitudes.length - 1) {
+			if (invisible) {
+              featurePoint.setStyle(invisibleStyle);
+			} else if (unreached) {
+              featurePoint.setStyle(styleFinishSmallPurple);
+            } else {
+              featurePoint.setStyle(styleFinishSmallGrey);
+            }
+
+            // addSecondCircleForFinish
+            const outerpoint = new ol.geom.Point(
+              ol.proj.fromLonLat([cp_longitudes[i], cp_latitudes[i]])
+            );
+            const featureOuterPoint = new ol.Feature({
+              name: "Controlpoint ID " + i,
+              geometry: outerpoint,
+            });
+			if (invisible) {
+              featureOuterPoint.setStyle(invisibleStyle);
+			} else if (unreached) {
+              featureOuterPoint.setStyle(styleFinishBigPurple);
+            } else {
+              featureOuterPoint.setStyle(styleFinishBigGrey);
+            }
+            vectorSourceControlPoints.addFeature(featureOuterPoint);
+          }
+
+		  // Handle start
+          if (i === 0) {
+            if (cp_longitudes.length > 1) {
+              var startProj = ol.proj.transform([cp_longitudes[0], cp_latitudes[0]], 'EPSG:4326', 'EPSG:3857');
+              var cp1Proj = ol.proj.transform([cp_longitudes[1], cp_latitudes[1]], 'EPSG:4326', 'EPSG:3857');
+              var diffLon = cp1Proj[0] - startProj[0];
+              var diffLat = cp1Proj[1] - startProj[1];
+              var startRotation = Math.atan2(diffLat, diffLon) - Math.PI / 2;
+              styleStartPurple.getImage().setRotation(-startRotation);
+              styleStartGrey.getImage().setRotation(-startRotation);
+            }
+			if (invisible) {
+              featurePoint.setStyle(invisibleStyle);
+			} else if (unreached) {
+              featurePoint.setStyle(styleStartPurple);
+            } else {
+              featurePoint.setStyle(styleStartGrey);
+            }
+          }
+
+          vectorSourceControlPoints.addFeature(featurePoint);
+
+          // Draw line to previous CP
+          if (i > 0 && !invisible) {
+            drawLine(cp_longitudes[i-1], cp_latitudes[i-1], cp_longitudes[i], cp_latitudes[i], !unreached)
+          }
+        }
+      }
+
+      function addSinglePoint(longitude, latitude) {
+        removeSinglePoint();
+        const point = new ol.geom.Point(ol.proj.fromLonLat([longitude, latitude]));
+        const featurePoint = new ol.Feature({
+          geometry: point,
+        });
+        const featureOuterPoint = new ol.Feature({
+              geometry: point,
+        });
+
+        myLocation = point;
+        vectorSourceMyLocationOuter.addFeature(featurePoint);
+        vectorSourceMyLocation.addFeature(featurePoint);
+      }
+
+      function removeSinglePoint() {
+        vectorSourceMyLocation.clear();
+        vectorSourceMyLocationOuter.clear();
+      }
+
+      function addKMLOverlay(kmlString) {
+        if (map !== undefined && kmlLayer !== undefined) {
+          map.removeLayer(kmlLayer);
+        }
+
+        var kmlLayer = new ol.layer.Vector({
+          source: new ol.source.Vector({
+            url: kmlString,
+            format: new ol.format.KML(),
+          }),
+        });
+        kmlLayer.setZIndex(1);
+
+        map.addLayer(kmlLayer);
+      }
+
+      function addImageOverlay(image, center, scale, rotation) {
+        if (map !== undefined && imgOverlayLayer !== undefined) {
+          map.removeLayer(imgOverlayLayer);
+        }
+
+        var geoImage = new ol.source.GeoImage({
+          url: image,
+          imageCenter: center,
+          imageScale: scale,
+          imageRotation: rotation,
+        });
+        geoImage.setRotation(rotation);
+
+        var imgOverlayLayer = new ol.layer.Image({
+          opacity: 1,
+          source: geoImage,
+        });
+
+        imgOverlayLayer.setZIndex(1);
+
+        map.addLayer(imgOverlayLayer);
+      }
+	  
+	  function setDefaultView() {
+        map.setView(defaultView);
+        if (!draw_only_start) {
+          drawAllLines();
+        }
+	  }
+
+      function rezoom() {
+         var extent = ol.extent.createEmpty();
+         var iAmInView = false;
+
+         controlPointsLayer
+           .getSource()
+           .getFeatures()
+           .forEach(function (feature) {
+             // add extent of every feature to the extent
+             extent = ol.extent.extend(
+               extent,
+               feature.getGeometry().getExtent()
+             );
+           });
+
+         var width = extent[2] - extent[0];
+         var height = extent[3] - extent[1];
+         var max = Math.max(width, height);
+         if (ol.extent.containsExtent(ol.extent.buffer(extent, max * 0.2), myLocation.getExtent())) {
+           iAmInView = true;
+         }
+         extent = ol.extent.extend(
+           extent,
+           myLocation.getExtent()
+         );
+
+         var width = extent[2] - extent[0];
+         var height = extent[3] - extent[1];
+         var max = Math.max(width, height);
+
+         extent = ol.extent.buffer(extent, max * 0.2); // add 20% to extent
+
+         if (!iAmInView) {  // only rezoom if we are outside the regular view
+           map.getView().fit(extent, map.getSize());
+           map.setView(
+                     new ol.View({
+                       center: myLocation.getCoordinates(),
+<!--                       extent: extent,-->  // maybe better to allow unlimited moving around
+                       zoom: global_maxCachedZoom  // disputable
+                     })
+                   );
+           map.getView().setCenter(myLocation.getCoordinates());
+         }
+      }
+
+      function setupTileLayers(minCachedZoom, maxCachedZoom) {
+        // Tiles up to a few levels are cached in android. The rest is optionally loaded from online source.
+
+        var purelyLocalSource =  new ol.source.XYZ({
+          url: "file:///data/data/at.univie.compass/files/tiles/{z}/{x}/{y}.png",
+          crossOrigin: "Anonymous",
+          maxZoom: maxCachedZoom
+        });
+
+        var combinedSource = new ol.source.XYZ({
+          url: "file:///data/data/at.univie.compass/files/tiles/{z}/{x}/{y}.png",
+          crossOrigin: "Anonymous",
+          maxZoom: 17  // max zoom where OpenTopoMap has tiles
+        });
+        combinedSource.setTileLoadFunction(function(tile, src) {
+          var urlparts = src.split('/');
+          var y = urlparts[urlparts.length-1].split(".")[0];
+          var x = urlparts[urlparts.length-2];
+          var z = urlparts[urlparts.length-3];
+          var src_online = "https://a.tile.opentopomap.org/" + z + "/" + x + "/" + y + ".png"  // TODO: how to choose among a-c?
+
+          if (z >= minCachedZoom && z <= maxCachedZoom) {
+            // We SHOULD have cached tiles: Try to load locally and if that fails, try online
+            var xhr = new XMLHttpRequest();
+            xhr.responseType = 'blob';
+            xhr.addEventListener('loadend', function (evt) {
+              var data = this.response;
+              if (data !== undefined && data !== null) {
+                // loading from local source succeeded
+                tile.getImage().src = URL.createObjectURL(data);
+              } else {
+                // failure ??
+                  tile.setState(3);  // TileState.ERROR = 3  (TODO: import TileState)
+              }
+            });
+            xhr.addEventListener('error', function () {
+              // loading from local source failed -> try again from online source
+              var xhr2 = new XMLHttpRequest();
+              xhr2.responseType = 'blob';
+              xhr2.addEventListener('loadend', function (evt) {
+                var data = this.response;
+                if (data !== undefined && data !== null) {
+                  // online loading succeeded
+                  tile.getImage().src = URL.createObjectURL(data);
+                } else {
+                  // online loading failed
+                  tile.setState(3);  // TileState.ERROR = 3  (TODO: import TileState)
+                }
+              });
+              xhr2.addEventListener('error', function () {
+                // online loading failed.
+                tile.setState(3);  // TileState.ERROR = 3  (TODO: import TileState)
+              });
+              xhr2.open('GET', src_online);
+              xhr2.send();
+            });
+            xhr.open('GET', src);
+            xhr.send();
+          }
+          else {
+            // we CERTAINLY have no cached tiles: Try online.
+            var xhr3 = new XMLHttpRequest();
+            xhr3.responseType = 'blob';
+            xhr3.addEventListener('loadend', function (evt) {
+              var data = this.response;
+              if (data !== undefined && data !== null) {
+                // online loading succeeded
+                tile.getImage().src = URL.createObjectURL(data);
+              } else {
+                // online loading failed?
+                tile.setState(3);  // TileState.ERROR = 3  (TODO: import TileState)
+              }
+            });
+            xhr3.addEventListener('error', function () {
+              // online loading failed.
+              tile.setState(3);  // TileState.ERROR = 3  (TODO: import TileState)
+            });
+            xhr3.open('GET', src_online);
+            xhr3.send();
+          }
+        });
+
+        var combinedTileLayer = new ol.layer.Tile({
+            source: combinedSource,
+            // no maxZoom because we want to zoom in further than zoom 17 and still see tiles
+        });
+        combinedTileLayer.setZIndex(1);
+
+        var purelyLocalTileLayer = new ol.layer.Tile({
+            source: purelyLocalSource,
+        });
+
+        purelyLocalTileLayer.setZIndex(0);
+
+        map.addLayer(combinedTileLayer);
+        map.addLayer(purelyLocalTileLayer);
+
+        initialResolution = map.getView().getResolution();
+	  }
+
+      function fitMapToControlPoints(initTiles) {
+	    // TODO: ??
+        document.querySelector("#map").style.height = window.innerHeight + "px";
+        map.updateSize();
+
+		// Estimate view rectangle with all controlpoints
+        var extent = ol.extent.createEmpty();
+        controlPointsLayer
+          .getSource()
+          .getFeatures()
+          .forEach(function (feature) {
+            // add extent of every CP to the extent
+            extent = ol.extent.extend(
+              extent,
+              feature.getGeometry().getExtent()
+            );
+          });
+        const width = extent[2] - extent[0];
+        const height = extent[3] - extent[1];
+        const max = Math.max(width, height);
+        extent = ol.extent.buffer(extent, max * 0.2); // add 20% to extent
+
+		extentDefault = extent;
+
+        map.getView().fit(extent);
+
+        var currentZoomLevel = map.getView().getZoom();
+        var maxZoomLevel;
+        if (currentZoomLevel > 17) {
+          currentZoomLevel = 17;
+        }
+
+        var minCachedZoom = Math.floor(currentZoomLevel);
+        var maxCachedZoom = Math.min(17, minCachedZoom + 2);
+        var lonLatExtent = ol.proj.transformExtent(extent, 'EPSG:3857', 'EPSG:4326');
+
+        global_maxCachedZoom = maxCachedZoom;
+        global_minCachedZoom = minCachedZoom;
+
+        // Limit View
+        map.getView().setZoom(currentZoomLevel);
+        map.setView(
+          new ol.View({
+            center: [
+              map.getView().getCenter()[0],
+              map.getView().getCenter()[1],
+            ],
+            extent: map.getView().calculateExtent(map.getSize()),
+            zoom: currentZoomLevel,
+          })
+        );
+        var view = map.getView();
+        defaultView = map.getView();
+        var center = view.getCenter();
+        view.setCenter(center);
+
+		if (!initTiles) {
+		  // Tell android which tiles it needs to cache
+		  android.onData(minCachedZoom + "," + maxCachedZoom + ";" + lonLatExtent);
+		} else {
+    	  setupTileLayers(minCachedZoom, maxCachedZoom);
+		}
+      }
+    </script>
+  </body>
+</html>

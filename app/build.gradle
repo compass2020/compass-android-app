@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+
+/*
+ * COMPASS orienteering game
+ * Copyright (C) 2021 University of Vienna
+ * This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+ */
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    lintOptions {
+        disable 'MissingTranslation'
+    }
+
+    defaultConfig {
+        applicationId "at.univie.compass"
+        minSdkVersion 23
+        targetSdkVersion 29
+        versionCode 11
+        versionName "1.0.4"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false  // keep false, otherwise course scan does not work in release build!! (json parser doesn't seem to work with minification)
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/license.txt'
+        // otherwise does not compile with errors like: "More than one file was found with OS independent path 'META-INF/<file>" with spring added as dependency
+        exclude 'META-INF/notice.txt'   // ...
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+//necessary for OSMDroid
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation 'androidx.core:core:1.6.0-alpha02'  // https://stackoverflow.com/a/64726933
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.13.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    // Testing
+    testImplementation 'org.mockito:mockito-core:3.7.7'
+    androidTestImplementation 'org.mockito:mockito-android:3.7.7'
+    androidTestImplementation 'com.android.support.test.uiautomator:uiautomator-v18:2.1.3'
+
+    // Dates
+    implementation 'joda-time:joda-time:2.9.4'
+
+    // Kalman filter
+//    implementation 'org.apache.commons:commons-math3:3.6.1'
+
+    // WorkManager (background Result upload)
+    implementation 'androidx.work:work-runtime:2.4.0'
+
+    // Location Permissions Request
+    implementation 'com.google.android.gms:play-services-location:17.1.0'
+
+    // spring (backend access)
+    implementation 'org.springframework.android:spring-android-rest-template:2.0.0.M3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.0'
+
+    // serialize objects for persistent storage in SharedPreferences
+    implementation 'com.google.code.gson:gson:2.8.6'
+
+    // QR Codes. Do not update! https://github.com/journeyapps/zxing-android-embedded#older-sdk-versions
+    implementation('com.journeyapps:zxing-android-embedded:4.1.0') { transitive = false }
+    implementation 'com.google.zxing:core:3.3.0'
+
+    //Implementation for Position
+    implementation 'com.google.android.material:material:1.2.1'
+    androidTestImplementation 'androidx.test:rules:1.3.0-beta01'
+}

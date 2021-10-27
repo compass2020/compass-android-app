@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ COMPASS orienteering game
+  ~ Copyright (C) 2021 University of Vienna
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+  -->
+
+<resources>
+    <string name="app_name" translatable="false">COMPASS</string>
+    <string name="cp_name_regular" translatable="false">#%1$d</string>
+    <string name="notification_title" translatable="false">COMPASS</string>
+
+    <string name="ble_not_supported">BLE ei ole toetatud</string>
+    <string name="label_data">Andmed:</string>
+    <string name="label_device_address">Seadme aadress:</string>
+    <string name="label_state">Staatus:</string>
+    <string name="no_data">Andmed puuduvad</string>
+    <string name="connected">Ühendatud</string>
+    <string name="disconnected">Ühenduseta</string>
+    <string name="title_devices">BLE Seadme skännimine</string>
+    <string name="error_bluetooth_not_supported">Bluetooth pole toetatud.</string>
+    <string name="unknown_device">Tundmatu seade</string>
+    <string name="unknown_characteristic">Tundmatud omadused</string>
+    <string name="unknown_service">Tundmatu teenus</string>
+    <string name="menu_connect">Ühenda</string>
+    <string name="menu_disconnect">Välju</string>
+    <string name="menu_scan">Skänni</string>
+    <string name="menu_stop">Peata</string>
+    <string name="menu_refresh">Uuenda</string>
+    <string name="welcome">Tere tulemast!</string>
+    <string name="scan_new_course">Skänni uus rada</string>
+    <string name="enter">Sisesta</string>
+    <string name="congratulations_you_finished_the_run">Palju õnne! Lõpetasid jooksu.</string>
+    <string name="your_time">Sinu aeg: %1$s</string>
+    <string name="previous">Eelmine</string>
+    <string name="next">Järgmine</string>
+    <string name="send_pending_results">Saada ootel tulemused</string>
+    <string name="delete_results">Kustuta tulemused</string>
+    <string name="change_nickname">Muuda hüüdnime</string>
+    <string name="delete_storage">Tühjenda mälu</string>
+    <string name="manage_my_courses">Halda radu</string>
+    <string name="choose_heart_rate_device">Vali pulsiseade</string>
+    <string name="test_heart_rate_device">Testi pulsiseadet</string>
+    <string name="scan_qr_code">QR-Skänn</string>
+    <string name="start_run">Start!</string>
+    <string name="gps_on_off">GPS</string>
+    <string name="version">Versioon %1$s</string>
+    <string name="trying_to_connect_to">Ühendamine seadmega %1$s</string>
+    <string name="trying_to_connect_to_address">Ühendamine seadmega aadressil %1$s</string>
+    <string name="connection_successful">Ühendamine õnnestus!</string>
+    <string name="connected_please_make_sure">%1$s ühendamine õnnestus. Palun veendu, et see oleks jooksu alustamisel sisse lülitatud!</string>
+    <string name="connection_failed">Ühendus nurjus</string>
+    <string name="connection_unsuccessful">Ühendus nurjus. Kas oled kindel, et valisid õige seadme? BLE peab olema seadme poolt toetatud!</string>
+    <string name="do_you_want_to_delete">Kas soovid kustutada kõik salvestatud andmed? (Tulemused, Rajad)</string>
+    <string name="do_you_want_to_delete_results">Kas soovid kustutada kõik salvestatud tulemused?</string>
+    <string name="yes">Jah</string>
+    <string name="no">Ei</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Tühista</string>
+    <string name="quit_run">Lõpeta jooksmine</string>
+    <string name="welcome_name">Tere tulemast, %1$s!</string>
+    <string name="please_wait_while_the_course_is_loaded">Palun oota kuni rada on laetud…</string>
+    <string name="no_course_qr_code_scanned">QR Koodi ei skännitud!</string>
+    <string name="no_cp_qr_code_scanned">QR Koodi ei skännitud!</string>
+    <string name="enter_nickname">Sisesta hüüdnimi, mille järgi su juhendaja su hiljem ära tunneb.</string>
+    <string name="name_cannot_be_empty">Nimi ei tohi olla tühi!</string>
+    <string name="course_now_available">Rada on nüüd saadaval!</string>
+    <string name="caching_the_map">Kaardi allalaadimine… See võib võtta aega, palun kannatust!</string>
+    <string name="next_question">Järgmine küsimus!</string>
+    <string name="your_answer_correct_answer">Sinu vastus: %1$s\n\nÕige vastus: %2$s</string>
+    <string name="want_to_activate_gps">Kas soovid GPSi sisse lülitada? See salvestab ainult sinu asukohta hilisemaks hindamiseks veebilehel. Sa pead  ikkagi QR koode skännima!</string>
+    <string name="cp_name_first">Start</string>
+    <string name="cp_name_last">Finiš</string>
+    <string name="control_point_descriptions">Kontrollpunktide kirjeldus</string>
+    <string name="do_you_really_want_to_stop_run">Kas soovid tõesti praegust jooksu lõpetada? Sinu tulemust ei salvestata</string>
+    <string name="start_your_run">Alusta oma jooksu!</string>
+    <string name="regular_cp_reached">Sa jõudsid #%1$d kontrollpuntki!</string>
+    <string name="wrong_cp">See on vale kontrollpunkt!</string>
+    <string name="at_start">Oled alguspunktis! Klõpsa \"Start!\" et alustada.</string>
+    <string name="notification_text">Asukohaandmete hankimine</string>
+    <string name="borgMessage">Hästi tehtud! Kuidas tundub füüsiline koormus siiamaani?</string>
+    <string name="borgLevel1">väga kerge</string>
+    <string name="borgLevel2">kerge</string>
+    <string name="borgLevel3">mõõdukas</string>
+    <string name="borgLevel4">mõnevõrra raske</string>
+    <string name="borgLevel5">üpris raske</string>
+    <string name="borgLevel6">raske</string>
+    <string name="borgLevel7">väga raske</string>
+    <string name="borgLevel8">väga, väga raske</string>
+    <string name="borgLevel9">äärmiselt raske</string>
+    <string name="borgLevel10">täiesti kurnatud</string>
+    <string name="you_can_skip">Võid jätta järgmise kontrollpunkti vahele! Mine otse kontrollpunkti #%1$d!</string>
+    <string name="you_can_skip_finish">Võid jätta järgmise kontrollpuntki vahele! Mine otse finišisse!</string>
+    <string name="turn_on_location_qr">Palun lülita GPSi kasutamiseks asukoht sisse!</string>
+    <string name="turn_on_location_gps">GPS režiim nõuab asukoha värskendamist. Palun lülita asukoht sisse!</string>
+    <string name="location_settings">Asukoha sätted</string>
+    <string name="error_cannot_fetch_course_probably_due_to_internet">Võrgu viga! Kas seade on ühendatud internetiga?</string>
+    <string name="results_title">Eelmised Jooksud</string>
+    <string name="code">Kood</string>
+    <string name="course">Rada</string>
+    <string name="loading_map">Kaardi laadimine…</string>
+    <string name="show_results">Kuva tulemused</string>
+    <string name="missing_tiles_due_to_internet">Kaarti ei saanud alla laadida. Kas seade on ühendatud internetiga?</string>
+    <string name="click_result_link">Klõpsa \'%1$s\'  menüüs kõikide jooksude ja tulemuste vaatamiseks</string>
+    <string name="result_not_uploaded_yet">See tulemus laetakse üles kohe, kui võrguühendus on saadaval.</string>
+    <string name="where_am_i">Kas vajad vihjet?</string>
+    <string name="show_my_location">Näita minu asukohta</string>
+    <string name="location_already_showing">Su asukoht on juba nähtav!</string>
+    <string name="no_location_available">Asukoht pole saadaval!</string>
+    <string name="session_has_not_startet_yet">See seanss pole veel alanud! See algab %1$s.</string>
+    <string name="session_has_already_ended">See seanss on juba läbi! See lõppes %1$s.</string>
+    <string name="error_double_scan_unique_qr_code">Seda QR Koodi on juba kasutatud!</string>
+    <string name="error_course_not_found">Rada ei leitud. Kas kasutasid õiget QR Koodi?</string>
+    <string name="mc_hint">Õigeid vastuseid võib olla mitu.</string>
+    <string name="first_visit">Lisateave COMPASSi kohta!</string>
+    <string name="update">Värskendus</string>
+    <string name="update_recommended">Uus versioon on saadaval!</string>
+    <string name="update_required">Teie COMPASS praegune versioon on aegunud. Selle rakenduse jätkamiseks värskendage seda!</string>
+    <string name="cancel_run">Lõpeta jooksmine</string>
+    <string name="continue_run">Jätka</string>
+    <string name="skip_this_controlpoint">Jäta järgmine kontrollpunkt vahele</string>
+    <string name="turn_on_location">Palun lülita asukoht sisse!</string>
+</resources>

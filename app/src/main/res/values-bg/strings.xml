@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ COMPASS orienteering game
+  ~ Copyright (C) 2021 University of Vienna
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+  -->
+
+<resources>
+    <string name="app_name" translatable="false">COMPASS</string>
+    <string name="cp_name_regular" translatable="false">#%1$d</string>
+    <string name="notification_title" translatable="false">COMPASS</string>
+
+    <string name="ble_not_supported">BLE не се поддържа</string>
+    <string name="label_data">Данни:</string>
+    <string name="label_device_address">Адрес на устройството:</string>
+    <string name="label_state">Страна:</string>
+    <string name="no_data">Липсват данни</string>
+    <string name="connected">Свързан</string>
+    <string name="disconnected">Не си свързан</string>
+    <string name="title_devices">BLE </string>
+    <string name="error_bluetooth_not_supported">Bluetooth не се поддържа</string>
+    <string name="unknown_device">Неразпознава устройството</string>
+    <string name="unknown_characteristic">Неразпознава данните</string>
+    <string name="unknown_service">Неразпознава връзката</string>
+    <string name="menu_connect">Свързване</string>
+    <string name="menu_disconnect">Излизане</string>
+    <string name="menu_scan">Сканирай</string>
+    <string name="menu_stop">Спри</string>
+    <string name="menu_refresh">Зареди отново</string>
+    <string name="welcome">Добре дошъл!</string>
+    <string name="scan_new_course">Сканирай нов курс</string>
+    <string name="enter">Потвърди</string>
+    <string name="congratulations_you_finished_the_run">Поздравления! Ти приключи състезанието.</string>
+    <string name="your_time">Време : %1$s</string>
+    <string name="previous">Предходен</string>
+    <string name="next">Продължи</string>
+    <string name="send_pending_results">Изпрати чакащите резултати</string>
+    <string name="delete_results">Изстрий резултатите</string>
+    <string name="change_nickname">Промяна на името</string>
+    <string name="delete_storage">Изтрий запазените данни</string>
+    <string name="manage_my_courses">Управление на моите курсове</string>
+    <string name="choose_heart_rate_device">Избери устройство за измерване на сърдечен ритъм</string>
+    <string name="test_heart_rate_device">Тест устройство за сърдечен режим</string>
+    <string name="scan_qr_code">QR -сканиране</string>
+    <string name="start_run">Старт!</string>
+    <string name="gps_on_off">GPS</string>
+    <string name="version">Версия %1$s</string>
+    <string name="trying_to_connect_to">Свързване с %1$s</string>
+    <string name="trying_to_connect_to_address">Свързване с устройство с адрес %1$s.....</string>
+    <string name="connection_successful">Успешна интернет връзка.</string>
+    <string name="connected_please_make_sure">%1$s свърза се успешно. Моля, уверите се че интернет връзката работи преди да започнеш маршрута.</string>
+    <string name="connection_failed">Връзката се разпадна.</string>
+    <string name="connection_unsuccessful">Връзката не е успешна. Увери се, че си избрал вярното устройство. Трябва да поддържа Bluetooth Low Energy!</string>
+    <string name="do_you_want_to_delete">Наистина ли искаш да изстриеш запазените данни? (Резултати, Курс)</string>
+    <string name="do_you_want_to_delete_results">Искаш ли да изстриеш запазените резултати?</string>
+    <string name="yes">Да</string>
+    <string name="no">Не</string>
+    <string name="ok">Ок</string>
+    <string name="cancel">Край</string>
+    <string name="quit_run">Прекъсни</string>
+    <string name="welcome_name">Добре дошъл, %1$s!</string>
+    <string name="please_wait_while_the_course_is_loaded">Моля, изчакай докато се зареди курсът</string>
+    <string name="no_course_qr_code_scanned">QR кодът не е сканиран</string>
+    <string name="no_cp_qr_code_scanned">QR кодът не е сканиран</string>
+    <string name="enter_nickname">Впиши име с което инструктурът ти да те разпознава</string>
+    <string name="name_cannot_be_empty">Името не може да остане празна!</string>
+    <string name="course_now_available">Курсът е наличен!</string>
+    <string name="caching_the_map">Картата се зарежда. Това може да отнеме време, за това бъди търпелив!</string>
+    <string name="next_question">Следващ въпрос</string>
+    <string name="your_answer_correct_answer">Отговор:%1$s\n\n Верен отговор: %2$s</string>
+    <string name="want_to_activate_gps">Искаш ли да активираш GPS? Това ще позволи само записване на локацията ти за резултатите в платформата. Трябва да сканираш QR кодовете!</string>
+    <string name="cp_name_first">Начало</string>
+    <string name="cp_name_last">Финал</string>
+    <string name="control_point_descriptions">Описание на контролните точки</string>
+    <string name="do_you_really_want_to_stop_run">Наистина ли искаш да прекъснеш бягането? Резултатите няма да бъдат запазени.</string>
+    <string name="start_your_run">Започни трасето!</string>
+    <string name="regular_cp_reached">Достигна контролните точка #%1$d!</string>
+    <string name="wrong_cp">Това е грешната контролните точка!</string>
+    <string name="at_start">Ти си в началото! Натисни "Старт" за да започнеш.</string>
+    <string name="notification_text">Намери локация</string>
+    <string name="borgMessage">Справяш се много добре! Как се чувстваш?</string>
+    <string name="borgLevel1">много лесно</string>
+    <string name="borgLevel2">лесно</string>
+    <string name="borgLevel3">средно трудно</string>
+    <string name="borgLevel4">донякъде трудно</string>
+    <string name="borgLevel5">доста трудно</string>
+    <string name="borgLevel6">трудно</string>
+    <string name="borgLevel7">много трудно</string>
+    <string name="borgLevel8">изключително трудно</string>
+    <string name="borgLevel9">екстремно</string>
+    <string name="borgLevel10">изключително изморително</string>
+    <string name="you_can_skip">Можеш да пропуснеш следващата контролна точка. Тръгни направо към контролна точка #%1$d!</string>
+    <string name="you_can_skip_finish">Можеш да пропуснеш следващата контролна точка! Тръгни направо към финала!</string>
+    <string name="turn_on_location_qr">Моля, включи локация, за да ползваш QR кода!</string>
+    <string name="turn_on_location_gps">GPS изисква ъпдейт на локацията. Моля, включи локация!</string>
+    <string name="location_settings">Настройки на локация</string>
+    <string name="error_cannot_fetch_course_probably_due_to_internet">Network error! Устройството свързано ли е в мрежа?</string>
+    <string name="results_title">Предходни маршрути</string>
+    <string name="code">Код</string>
+    <string name="course">Курс</string>
+    <string name="loading_map">Картата се зарежда....</string>
+    <string name="show_results">Покажи резултати</string>
+    <string name="missing_tiles_due_to_internet">Картата не може да се свали. Вързан ли си в интернет?</string>
+    <string name="click_result_link">Избери \'%1$s\' от менюто за да видиш всичките си резултати.</string>
+    <string name="result_not_uploaded_yet">Резултатите ще се заредят при наличие на интернет връзка.</string>
+    <string name="where_am_i">Имаш ли нужда от помощ?</string>
+    <string name="show_my_location">Покажи моята локация</string>
+    <string name="location_already_showing">Локацията ти е видима!</string>
+    <string name="no_location_available">Локацията не е налична</string>
+    <string name="session_has_not_startet_yet">Сесията не е започнала. Ще започне на %1$s</string>
+    <string name="session_has_already_ended">Сесията вече приключи. Край на %1$s.</string>
+    <string name="error_double_scan_unique_qr_code">QR кода вече е използван.</string>
+    <string name="error_course_not_found">Курсът не е намерен. Провери QR кода.</string>
+    <string name="mc_hint">Може да има повече от един верен отговор</string>
+    <string name="first_visit">Научете повече за COMPASS!</string>
+    <string name="update">Актуализиране</string>
+    <string name="update_recommended">Налична е нова версия!</string>
+    <string name="update_required">Вашата текуща версия на COMPASS е остаряла. Моля, актуализирайте, за да продължите да използвате това приложение!</string>
+    <string name="cancel_run">Прекъсни</string>
+    <string name="continue_run">Продължи</string>
+    <string name="skip_this_controlpoint">Пропуснете следващата контролна точка</string>
+    <string name="turn_on_location">Моля, включи локация!</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ COMPASS orienteering game
+  ~ Copyright (C) 2021 University of Vienna
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+  -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item android:id="@+id/menu_toggle" android:icon="@drawable/ic_menu" app:showAsAction="ifRoom"
+    android:title="">
+<menu>
+    <item android:id="@+id/change_nickname" android:icon="@drawable/ic_edit" android:title="@string/change_nickname" app:showAsAction="never"/>
+    <item android:id="@+id/show_results" android:icon="@drawable/ic_results" android:title="@string/show_results" app:showAsAction="never" />
+    <item android:id="@+id/delete_storage"  android:icon="@drawable/ic_delete" android:title="@string/delete_storage" app:showAsAction="never" />
+    <item android:id="@+id/manage_courses" android:icon="@drawable/ic_manage" android:title="@string/manage_my_courses" app:showAsAction="never" />
+<!--    <item android:id="@+id/change_ip" android:icon="@drawable/ic_edit" android:title="Change IP" app:showAsAction="never"/>-->
+    <item android:id="@+id/connect_ble" android:icon="@drawable/ic_ble_connect" android:title="@string/choose_heart_rate_device" app:showAsAction="never"/>
+    <item android:id="@+id/test_ble" android:icon="@drawable/ic_test_connection" android:title="@string/test_heart_rate_device" app:showAsAction="never"/>
+</menu>
+</item>
+</menu>

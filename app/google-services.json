@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "693330631709",
+    "firebase_url": "https://compass-9387e.firebaseio.com",
+    "project_id": "compass-9387e",
+    "storage_bucket": "compass-9387e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:693330631709:android:06d60beeac209767c07af4",
+        "android_client_info": {
+          "package_name": "at.univie.compass"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "693330631709-53dnfel2ki73g23vb7snlj05pjea3ntl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlM5Die7BHG4Y0V7PF3evhgkpDksXfDHc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "693330631709-53dnfel2ki73g23vb7snlj05pjea3ntl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

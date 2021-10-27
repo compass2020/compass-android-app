@@ -1,0 +1,126 @@
+<!--
+  ~ COMPASS orienteering game
+  ~ Copyright (C) 2021 University of Vienna
+  ~ This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>
+  -->
+
+<resources>
+    <string name="app_name" translatable="false">COMPASS</string>
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="title_devices">BLE Device Scan</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="welcome">Welcome!</string>
+    <string name="scan_new_course">Scan new course</string>
+    <string name="enter">Enter</string>
+    <string name="congratulations_you_finished_the_run">Congratulations! You finished the run.</string>
+    <string name="your_time">Your time: %1$s</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="send_pending_results">Send Pending Results</string>
+    <string name="delete_results">Delete results</string>
+    <string name="change_nickname">Change Nickname</string>
+    <string name="delete_storage">Delete Storage</string>
+    <string name="manage_my_courses">Manage my courses</string>
+    <string name="choose_heart_rate_device">Choose heart rate device</string>
+    <string name="test_heart_rate_device">Test heart rate device</string>
+    <string name="scan_qr_code">QR Scan</string>
+    <string name="start_run">Start!</string>
+    <string name="gps_on_off">GPS</string>
+    <string name="version">Version %1$s</string>
+    <string name="trying_to_connect_to">Trying to connect to %1$s</string>
+    <string name="trying_to_connect_to_address">Trying to connect to device with address %1$s</string>
+    <string name="connection_successful">Connection successful!</string>
+    <string name="connected_please_make_sure">%1$s was successfully connected. Please make sure, that it is turned on when starting the run!</string>
+    <string name="connection_failed">Connection failed!</string>
+    <string name="connection_unsuccessful">Connection was not successful. Are you sure that you picked the correct device? Device must support Bluetooth Low Energy!</string>
+    <string name="do_you_want_to_delete">Do you want to delete all stored data? (Results, Course)</string>
+    <string name="do_you_want_to_delete_results">Do you want to delete all stored results?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="quit_run">Quit run</string>
+    <string name="welcome_name">Welcome, %1$s!</string>
+    <string name="please_wait_while_the_course_is_loaded">Please wait while the course is loaded</string>
+    <string name="no_course_qr_code_scanned">No QR Code was scanned!</string>
+    <string name="no_cp_qr_code_scanned">No QR Code was scanned!</string>
+    <string name="enter_nickname">Enter a nickname by which your instructor can recognize you later.</string>
+    <string name="name_cannot_be_empty">Name cannot be empty!</string>
+    <string name="course_now_available">Course is now available!</string>
+    <string name="caching_the_map">Downloading the map… This can take some time, please be patient!</string>
+    <string name="next_question">Next question!</string>
+    <string name="your_answer_correct_answer">Your answer: %1$s\n\nCorrect answer: %2$s</string>
+    <string name="want_to_activate_gps">Do you want to turn on GPS? This will only record your position for later evaluation on the website. You still have to scan QR codes!</string>
+    <string name="cp_name_regular" translatable="false">#%1$d</string>
+    <string name="cp_name_first">Start</string>
+    <string name="cp_name_last">Finish</string>
+    <string name="control_point_descriptions">Control Point Descriptions</string>
+    <string name="do_you_really_want_to_stop_run">Do you really want to stop the current run? Your result will not be saved.</string>
+    <string name="start_your_run">Start your run!</string>
+    <string name="regular_cp_reached">You reached control point #%1$d!</string>
+    <string name="wrong_cp">This is the wrong control point!</string>
+    <string name="at_start">You are at the start location! Click \"Start!\" to begin.</string>
+    <string name="notification_title" translatable="false">COMPASS</string>
+    <string name="notification_text">Getting location data</string>
+    <string name="borgMessage">You are doing well so far! How exhausted are you?</string>
+    <string name="borgLevel1">very easy</string>
+    <string name="borgLevel2">easy</string>
+    <string name="borgLevel3">moderate</string>
+    <string name="borgLevel4">somewhat hard</string>
+    <string name="borgLevel5">quite hard</string>
+    <string name="borgLevel6">hard</string>
+    <string name="borgLevel7">very hard</string>
+    <string name="borgLevel8">very, very hard</string>
+    <string name="borgLevel9">extremely hard</string>
+    <string name="borgLevel10">totally exhausted</string>
+    <string name="you_can_skip">You can skip the next control point! Go directly to control point #%1$d!</string>
+    <string name="you_can_skip_finish">You can skip the next control point! Go directly to the finish!</string>
+    <string name="turn_on_location_qr">Please turn on location to use GPS!</string>
+    <string name="turn_on_location_gps">GPS mode requires location updates. Please turn on location!</string>
+    <string name="turn_on_location">Please turn on location if your device does not appear!</string>
+    <string name="location_settings">Location settings</string>
+    <string name="error_cannot_fetch_course_probably_due_to_internet">Network error! Is the device connected to the internet?</string>
+    <string name="results_title">Previous Runs</string>
+    <string name="code">Code</string>
+    <string name="course">Course</string>
+    <string name="loading_map">Loading map…</string>
+    <string name="show_results">Show Results</string>
+    <string name="missing_tiles_due_to_internet">Could not download the map. Is the device connected to the internet?</string>
+    <string name="click_result_link">Click \'%1$s\' in the menu to view all your runs and results.</string>
+    <string name="result_not_uploaded_yet">This result will be uploaded as soon as a network connection is available.</string>
+    <string name="where_am_i">Do you need a hint?</string>
+    <string name="show_my_location">Show my location</string>
+    <string name="location_already_showing">Your location is already visible!</string>
+    <string name="no_location_available">No location available!</string>
+    <string name="session_has_not_startet_yet">This session has not started yet! It will begin on %1$s.</string>
+    <string name="session_has_already_ended">This session is already over! It ended on %1$s.</string>
+    <string name="error_double_scan_unique_qr_code">This QR Code has already been used!</string>
+    <string name="error_course_not_found">Course not found. Did you use the right QR Code?</string>
+    <string name="mc_hint">There may be multiple correct answers.</string>
+    <string name="first_visit">Learn more about COMPASS!</string>
+    <string name="update_recommended">A new version is available!</string>
+    <string name="update_required">You current version of COMPASS is outdated. Please update to continue using this app!</string>
+    <string name="update">Update</string>
+    <string name="continue_run">Continue</string>
+    <string name="cancel_run">Cancel run</string>
+    <string name="skip_this_controlpoint">Skip next control point</string>
+</resources>
